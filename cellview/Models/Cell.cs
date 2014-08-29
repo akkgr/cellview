@@ -13,6 +13,8 @@ namespace cellview.Models
         public decimal lng { get; set; }
         public Icon icon { get { return new Icon();} }
         public decimal iconAngle { get; set; }
+        public decimal radius { get; set; }
+        public decimal range { get; set; }
         public string Area { get; set; }
         public string Street { get; set; }
         public string message { get { return string.Format("{0} {1}",Area,Street); } }

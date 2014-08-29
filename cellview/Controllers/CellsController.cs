@@ -49,6 +49,8 @@ namespace cellview.Controllers
                     lat = convert(fields[3]),
                     lng = convert(fields[2]),
                     iconAngle = decimal.Parse(fields[4]),
+                    radius = decimal.Parse(fields[5]),
+                    range = decimal.Parse(fields[6]) * 1000,
                     Area = fields[7],
                     Street = fields[8],
                 });
@@ -100,7 +102,7 @@ namespace cellview.Controllers
                 string title = string.Format("-{0}", i);
                 var list = from c in cosmote
                            where c.CellId.EndsWith(title)
-                           select new {c.CellId, c.lat, c.lng, c.message, c.icon, c.iconAngle };
+                           select new {c.CellId, c.lat, c.lng, c.message, c.icon, c.iconAngle,c.radius,c.range };
 
                 return list;
             }

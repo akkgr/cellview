@@ -7,10 +7,12 @@
     <script src="/scripts/bootstrap.min.js"></script>
     <script src="/leaflet/leaflet.js"></script>
     <script src="/scripts/leaflet.awesome-markers.js"></script>
-    <script src="/scripts/angular-leaflet-directive.min.js"></script>
+    <script src="/scripts/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="/leaflet/leaflet.css" />
     <link rel="stylesheet" href="/content/bootstrap.min.css" />
     <link rel="stylesheet" href="/content/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="/content/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="/content/MarkerCluster.css" />
     <link rel="stylesheet" href="/content/Main.css" />
     <title>Cell Viewer</title>
     <script src="/Scripts/App/app.js"></script>
@@ -43,19 +45,20 @@
         <div class="row fill">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul>
-                    <li ng-repeat="marker in markers">
-                        {{marker.CellId}}, {{marker.iconAngle}}
+                    <li ng-repeat="cell in cells">
+                        {{cell.CellId}}, {{cell.iconAngle}}
                     </li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
-                <leaflet center="london" markers="markers" class="fill">
-                </leaflet>
+                <!--<leaflet center="london" markers="markers" class="fill"></leaflet>-->
+                <div id="map" class="fill"></div>
             </div>
         </div>
     </div>
 
-    <script src="/scripts/L.Marker.Rotate.js"></script>-->
+    <script src="/scripts/L.Marker.Rotate.js"></script>
+    <script src="/scripts/Semicircle.js"></script>
 
 </body>
 </html>
