@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+<html ng-app="demoapp">
+<head>
+    <script src="/scripts/jquery-1.9.0.min.js"></script>
+    <script src="/scripts/angular.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/leaflet/leaflet.js"></script>
+    <script src="/scripts/leaflet.awesome-markers.js"></script>
+    <script src="/scripts/angular-leaflet-directive.min.js"></script>
+    <link rel="stylesheet" href="/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/content/bootstrap.min.css" />
+    <link rel="stylesheet" href="/content/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="/content/Main.css" />
+    <title>Cell Viewer</title>
+    <script src="/Scripts/App/app.js"></script>
+</head>
+<body ng-controller="DemoController">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Cell Finder</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" ng-model="query">
+                    </div>
+                    <button type="button" class="btn btn-default" ng-click="finditem()">Submit</button>
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="container-fluid fill">
+        <div class="row fill">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul>
+                    <li ng-repeat="marker in markers">
+                        {{marker.CellId}}, {{marker.iconAngle}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
+                <leaflet center="london" markers="markers" class="fill">
+                </leaflet>
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/L.Marker.Rotate.js"></script>-->
+
+</body>
+</html>
