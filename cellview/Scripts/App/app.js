@@ -17,8 +17,13 @@ app.controller('DemoController', function ($scope, $http) {
     var markers = new L.MarkerClusterGroup();
     map.addLayer(markers);
 
+    var circles = new L.layerGroup();
+    map.addLayer(circles);
+
     $scope.markers = markers;
     $scope.map = map;
+    $scope.cells = [];
+    $scope.circles = circles;
 
     //$scope.markers = {
     //    main_marker: {
@@ -37,6 +42,12 @@ app.controller('DemoController', function ($scope, $http) {
     //    markerColor: 'red'
     //};
 
+    $scope.clear = function () {
+        $scope.markers.clearLayers();
+        $scope.circles.clearLayers();
+        $scope.cells = [];
+    };
+
     $scope.finditem = function () {
 
         //var redMarker = L.AwesomeMarkers.icon({
@@ -44,18 +55,28 @@ app.controller('DemoController', function ($scope, $http) {
         //    markerColor: 'red'
         //});
 
-        $http.get('/api/cells/cosmote/' + $scope.query).success(function (data) {
-            angular.extend($scope, {
-                cells: data,
-            });
+        $http.get('/api/cells/' + $scope.provider + '/' + $scope.cellhex).success(function (data) {
+            //angular.extend($scope, {
+            //    cells: data,
+            //});
             data.forEach(function (item) {
-                var marker = L.marker([item.lat, item.lng]);//, { icon: redMarker });
+                $scope.cells.push(item);
+                var marker = L.marker([item.lat, item.lng], {});//, { icon: redMarker });
                 marker.setIconAngle(marker.iconAngle);
                 marker.on('click', function () {
-                    L.circle([item.lat, item.lng], item.range).setDirection(item.iconAngle, item.radius).addTo(map);
+                    if (marker.info) {
+                        map.removeLayer(marker.info);
+                        marker.info = null;
+                    } else {
+                        marker.info = L.circle([item.lat, item.lng], item.range).setDirection(item.iconAngle, item.radius).addTo(circles);
+                    }
                 });
                 $scope.markers.addLayer(marker);
             });
+            if (data.length > 0) {
+                var m = data[data.length - 1];
+                map.setView([m.lat, m.lng], 12);
+            }
         }).        
         error(function (data, status, headers, config) {
             alert(data);

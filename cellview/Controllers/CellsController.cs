@@ -102,7 +102,19 @@ namespace cellview.Controllers
                 string title = string.Format("-{0}", i);
                 var list = from c in cosmote
                            where c.CellId.EndsWith(title)
-                           select new {c.CellId, c.lat, c.lng, c.message, c.icon, c.iconAngle,c.radius,c.range };
+                           select new 
+                           {
+                               provider = "Cosmote",
+                               cellhex = id,
+                               c.CellId, 
+                               c.lat, 
+                               c.lng, 
+                               c.message, 
+                               c.icon, 
+                               c.iconAngle,
+                               c.radius,
+                               c.range 
+                           };
 
                 return list;
             }

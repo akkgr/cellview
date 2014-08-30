@@ -33,9 +33,15 @@
             <div class="collapse navbar-collapse">
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" ng-model="query">
+                        <select class="form-control" ng-model="provider">
+                            <option>Cosmote</option>
+                            <option>Vodafone</option>
+                            <option>Wind</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="Search" ng-model="cellhex">
                     </div>
                     <button type="button" class="btn btn-default" ng-click="finditem()">Submit</button>
+                    <button type="button" class="btn btn-default" ng-click="clear()">Clear Map</button>
                 </form>
             </div><!--/.nav-collapse -->
         </div>
@@ -44,9 +50,16 @@
     <div class="container-fluid fill">
         <div class="row fill">
             <div class="col-sm-3 col-md-2 sidebar">
-                <ul>
-                    <li ng-repeat="cell in cells">
-                        {{cell.CellId}}, {{cell.iconAngle}}
+                <ul class="list-group">
+                    <li ng-repeat="cell in cells" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{cell.CellId}}</h4>
+                        <h4 class="list-group-item-heading">{{cell.provider}} {{cell.cellhex}}</h4>
+                        <p class="list-group-item-text">
+                            {{cell.message}}<br />
+                            Heading : {{cell.iconAngle}}<br />
+                            Radius : {{cell.radius}}<br />
+                            Range : {{cell.range}}<br />
+                        </p>
                     </li>
                 </ul>
             </div>
